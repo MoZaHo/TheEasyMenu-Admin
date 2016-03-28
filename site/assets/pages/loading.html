@@ -1,0 +1,161 @@
+<style>
+
+@color-primary: #8b6139;
+@color-light-primary: lighten(@color-primary, 10%);
+
+
+.coffeeloader {
+  width: 300px;
+  height: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+  top: 50%;
+}
+
+.cupcontainer {
+  width: 60px;
+  height: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  top: 50px;
+  left: 5px;
+  .cup{
+    border-bottom: 40px solid @color-primary;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    height: 0;
+    width: 40px;
+    transform: rotate(180deg);
+    position: relative;
+    left: -3px;
+    top: 5px;
+    }
+    .handle{
+      width: 18px;
+      height: 10px;
+      border: 6px solid #8b6139;
+      position: relative;
+      top: -30px;
+      left: 35px;
+    }
+
+.glance  {
+
+  	border-bottom: 25px solid @color-light-primary;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	height: 0;
+	width: 2px;
+  transform: rotate(180deg);
+  position: absolute;
+  top: 13px;
+  left: 10px;
+}  
+  
+}
+  .plate{
+    background: @color-primary;
+    width: 100px;
+    height: 6px;
+    border-radius: 3px;
+    position: relative;
+    top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .bottom{
+    background: @color-primary;
+    width: 60px;
+    height: 6px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    position: relative;
+    top: 45px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+.steam {
+  width: 50px;
+  height: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  top: 50px;
+  left: 5px;
+}
+
+.smoke1 {
+ width: 6px;
+ height: 30px;
+ float: left;
+ margin-right: 6px;
+ margin-left: 4px;
+ border-radius: 3px;
+  &::before, &::after {
+    content: "";
+    background: @color-primary;
+    position: absolute;
+    animation: load .9s infinite reverse ease-in-out;
+    border-radius: 3px;
+  }
+}
+.smoke2 {
+ width: 6px;
+ height: 15px;
+ float: left;
+ margin-right: 6px;
+ margin-left: 4px;
+ border-radius: 3px;
+  
+  &::before, &::after {
+    content: "";
+    background: @color-primary;
+    position: absolute;
+    animation: load .6s infinite reverse ease-in-out;
+    border-radius: 3px;
+    margin-top: 5px;
+  }
+}
+.smoke3 {
+ width: 6px;
+ height: 30px;
+ float: left;
+ margin-right: 6px;
+ margin-left: 4px;
+ border-radius: 3px;
+  &::before, &::after {
+    content: "";
+    background: @color-primary;
+    position: absolute;
+    animation: load .9s infinite .5s reverse ease-in-out;
+    border-radius: 3px;
+  }
+}
+
+@keyframes load {
+  0% { top: 0; height: 30px; width: 6px; opacity: 0; }
+  50% {opacity: 1;  }
+  100% { top: 29px; height: 15px; width: 6px; opacity: 0;}
+}
+
+
+</style>
+
+<div class="coffeeloader">
+  <div class="steam">
+    <div class="smoke1"></div>
+    <div class="smoke2"></div>
+    <div class="smoke3"></div>
+  </div>  
+  <div class="cupcontainer">
+    <div class="cup"></div>
+    <div class="glance"></div>
+    <div class="handle"></div>
+   </div>
+  <div class="plate"></div>
+  <div class="bottom"></div>  
+</div>

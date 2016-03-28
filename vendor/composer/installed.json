@@ -1,0 +1,108 @@
+[
+    {
+        "name": "swiftmailer/swiftmailer",
+        "version": "v5.4.1",
+        "version_normalized": "5.4.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/swiftmailer/swiftmailer.git",
+            "reference": "0697e6aa65c83edf97bb0f23d8763f94e3f11421"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/0697e6aa65c83edf97bb0f23d8763f94e3f11421",
+            "reference": "0697e6aa65c83edf97bb0f23d8763f94e3f11421",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "require-dev": {
+            "mockery/mockery": "~0.9.1,<0.9.4"
+        },
+        "time": "2015-06-06 14:19:39",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "5.4-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "lib/swift_required.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Chris Corbyn"
+            },
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            }
+        ],
+        "description": "Swiftmailer, free feature-rich PHP mailer",
+        "homepage": "http://swiftmailer.org",
+        "keywords": [
+            "email",
+            "mail",
+            "mailer"
+        ]
+    },
+    {
+        "name": "phalcon/incubator",
+        "version": "v1.3.5",
+        "version_normalized": "1.3.5.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/phalcon/incubator.git",
+            "reference": "41383027bcf970f3ac194fcb46ef269dc0fa4cbd"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/phalcon/incubator/zipball/41383027bcf970f3ac194fcb46ef269dc0fa4cbd",
+            "reference": "41383027bcf970f3ac194fcb46ef269dc0fa4cbd",
+            "shasum": ""
+        },
+        "require": {
+            "ext-phalcon": ">=1.2.4",
+            "php": ">=5.3.6",
+            "swiftmailer/swiftmailer": ">=5.2"
+        },
+        "require-dev": {
+            "codeception/codeception": "*",
+            "php-mock/php-mock": "<0.6",
+            "phpunit/phpunit": "4.5.*",
+            "squizlabs/php_codesniffer": "2.*"
+        },
+        "time": "2015-05-06 18:08:48",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Phalcon": "Library/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3"
+        ],
+        "authors": [
+            {
+                "name": "Phalcon Team",
+                "email": "team@phalconphp.com"
+            }
+        ],
+        "description": "Adapters, prototypes or functionality that can be potentially incorporated to the C-framework.",
+        "homepage": "http://phalconphp.com",
+        "keywords": [
+            "framework",
+            "phalcon"
+        ]
+    }
+]
