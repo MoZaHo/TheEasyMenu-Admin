@@ -18,6 +18,12 @@
 		
 		<script src="//code.angularjs.org/1.5.2/angular.js"></script>
 		<script src="//code.angularjs.org/1.5.2/angular-route.js"></script>
+		
+		<script src="//monospaced.github.io/bower-qrcode-generator/js/qrcode.js"></script>
+  		<script src="//monospaced.github.io/bower-qrcode-generator/js/qrcode_UTF8.js"></script>
+		<script src="../assets/js/angular-qrcode.js"></script>
+		<script src="../assets/js/angular-md5.js"></script>
+		
 		<script src="../assets/js/app.js"></script>
 		
 	</head>
@@ -37,18 +43,11 @@
 		<div class="fluid-container">
 			
 			<div class="row">
-				<div class="col-md-12">
-					<div class="col-md-2">
-	          			<ul class="nav nav-sidebar">
-	            			<li><a href="#">Overview</a></li>
-	          			</ul>
-        			
-        			</div>
-        		
-          			<div class="col-md-10">
-          				<div ng-view></div>	
-	          		</div>
-          		</div>
+				<div class="col-md-1"></div>
+				<div class="col-md-10">
+						<div ng-view></div>	
+	          	</div>
+	          	<div class="col-md-1"></div>
 			</div>
 		</div>
 		
