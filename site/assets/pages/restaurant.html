@@ -1,0 +1,63 @@
+<ng-include src="assets/pages/loading.html"></ng-include>
+
+<div class="row">
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+		  <li><a href="#/">Dashboard</a></li>
+		  <li>{{ restaurant.name }}</li>
+		</ol>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-6">
+  		<div class="panel panel-default">
+			<div class="panel-heading">Branches</div>
+ 			<div class="panel-body">
+ 				<div class="row">
+ 					<div class="col-md-6"></div>
+ 					<div class="col-md-3"><strong>active orders</strong></div>
+ 					<div class="col-md-3"><strong>total users</strong></div>
+ 				</div>
+ 				<div class="row" ng-repeat="b in branches">
+ 					<div class="col-md-6"><a ng-href="#/restaurant/{{restaurant.id}}/{{b.id}}">{{ b.name }}</a></div>
+ 					<div class="col-md-3">{{ b.orders }}</div>
+ 					<div class="col-md-3">{{ b.users }}</div>
+ 				</div>
+ 			</div>
+ 			<div class="panel-footer text-right">
+ 				<button class="btn btn-xs btn-success" ng-click="">Add Restaurant</button>
+ 			</div>
+ 		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="panel panel-default">
+		<div class="panel-heading">Active Orders</div>
+  			<div class="panel-body">
+  				<div class="row">
+ 					<div class="col-md-12 text-center"><h2>{{ restaurant.orders }}</h2></div>
+ 				</div>
+  			</div>
+		</div>
+	</div>
+ 	<div class="col-md-3">
+  		<div class="panel panel-default">
+		<div class="panel-heading">Users</div>
+  			<div class="panel-body">
+  				<div class="row">
+ 					<div class="col-md-12 text-center"><h2>{{ restaurant.users }}</h2></div>
+ 				</div>
+  			</div>
+		</div> 				
+ 	</div>
+	<div class="col-md-6">
+		<div class="panel panel-default">
+		<div class="panel-heading">Menu</div>
+  			<div class="panel-body">
+  				<div class="row">
+ 					<div class="col-md-12" ng-repeat="m in menus">{{ m.menu.name }}</div>
+ 				</div>
+  			</div>
+		</div>
+	</div>
+ </div>

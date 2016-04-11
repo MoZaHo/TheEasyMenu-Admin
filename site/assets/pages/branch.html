@@ -1,0 +1,420 @@
+<ng-include src="'../assets/pages/loading.html'" ng-if="loading" ng-cloak></ng-include>
+
+
+<div class="row" ng-if="!loading" ng-cloak>
+	<div class="col-md-12">
+		<ol class="breadcrumb">
+		  <li><a href="#/">Dashboard</a></li>
+		  <li><a href="#/restaurant/{{restaurant.id}}">{{ restaurant.name }}</a></li>
+		  <li>{{ branches[0].name }}</li>
+		</ol>
+	</div>
+</div>
+
+<div class="row" ng-if="!loading" ng-cloak>
+	<div class="col-md-2">
+		<div class="panel panel-default">
+		<div class="panel-heading">Navigation</div>
+  			<div class="panel-body">
+  				<div class="row">
+  					<div class="col-md-12">
+  						<a href="" ng-click="view = '0'">Overview</a><br/>
+  						<a href="" ng-click="view = '2'">Staff</a><br/>
+  						<a href="" ng-click="view = '3'">Menu</a><br/><br/>
+  						<a href="" ng-click="view = '4'">Tables</a><br/><br/>
+  						<a href="" ng-click="view = '1'">Settings</a><br/>
+ 					</div>
+ 				</div>
+  			</div>
+		</div>
+	</div>
+	
+	
+	<div class="col-md-10" ng-show="view == '0'" ng-cloak>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="panel panel-default">
+				<div class="panel-heading">Active Orders</div>
+		  			<div class="panel-body">
+		  				<div class="row">
+		 					<div class="col-md-12 text-center"><a href="" ng-click="view = '2'"><h2 class="text-success">{{ restaurant.orders }}</h2></a></div>
+		 				</div>
+		  			</div>
+				</div>
+			</div>
+		 	<div class="col-md-4">
+		  		<div class="panel panel-default">
+				<div class="panel-heading">Users</div>
+		  			<div class="panel-body">
+		  				<div class="row">
+		 					<div class="col-md-12 text-center text-warning"><h2>{{ restaurant.users }}</h2></div>
+		 				</div>
+		  			</div>
+				</div> 				
+		 	</div>
+		 	<div class="col-md-4">
+		  		<div class="panel panel-default">
+				<div class="panel-heading">Amount</div>
+		  			<div class="panel-body">
+		  				<div class="row">
+		 					<div class="col-md-12 text-center text-success"><h2>R TODO</h2></div>
+		 				</div>
+		  			</div>
+				</div> 				
+		 	</div>
+			<div class="col-md-12">
+		  		<div class="panel panel-default">
+					<div class="panel-heading">Reservations</div>
+		 			<div class="panel-body">
+		 			</div>
+		 			<div class="panel-footer text-right">
+		 				<button class="btn btn-xs btn-warning" ng-click=""></button>
+		 			</div>
+		 		</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-md-10" ng-show="view == '1'" ng-cloak>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Settings
+						<button type="button" class="close" ng-click="view = '0'">
+  							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="panel-body">
+						<div class="row form-group">
+							<div class="col-md-4">Branch Active</div>
+							<div class="col-md-8">
+								<div class="material-switch pull-right">
+                            		<input id="someSwitchOptionPrimary" name="someSwitchOption001" type="checkbox" ng-change="SaveSettings(1000)" ng-model="branches[0].status" ng-true-value="'1'" ng-false-value="'0'" />
+                            		<label for="someSwitchOptionPrimary" class="label-primary"></label>
+                        		</div>
+							</div>
+						</div>
+						
+						<div class="row form-group">
+							<div class="col-md-4">Location</div>
+							<div class="col-md-4">
+								<input class="form-control" value="" placeholder="Lat" ng-model="branches[0].locationx">
+							</div>
+							<div class="col-md-4">
+								<input class="form-control" value="" placeholder="Long" ng-model="branches[0].locationy">
+							</div>
+						</div>
+						
+						<div class="row form-group">
+							<div class="col-md-4">Menus</div>
+							<div class="col-md-8">
+								<select class="form-control" multiple>
+  									<option>1</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="panel-footer text-right">
+						<span class="small text-muted" ng-if="!saving">changes will automatically save</span>
+						<span class="text-warning text-right" ng-if="saving">{{ saving }}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 text-left">
+  					<button type="button" class="btn btn-success" ng-click="SaveSettings(0)">Save</button>
+			</div>
+		</div>
+	</div>
+	
+	<!-- LINK STAFF TO BRANCH -->
+	<div class="col-md-10" ng-show="view == '2'" ng-cloak>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Staff
+						<button type="button" class="close" ng-click="view = '0'">
+  							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					
+					<div class="panel-body">
+						<div class="row form-group">
+							<div class="col-md-12">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>Staff</th>
+											<th>ID</th>
+											<th>Email</th>
+											<th>Telephone</th>
+											<th>Role</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat="s in staff">
+											<td>{{ s.name }} {{ s.surname }}</td><td>{{ s.id_number }}</td><td>{{ s.email }}</td><td>{{ s.telephone }}</td><td></td><td><button class="btn btn-xs btn-default" ng-click="SetEditStaff(s)">View</button></td>
+										</tr>
+									</tbody>																	
+								</table>
+																
+							</div>
+						</div>
+					</div>
+					<div class="panel-footer">
+						<button type="button" class="btn btn-xs btn-default" ng-click="SetEditStaff(0)">
+							Add Staff
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Modal -->
+	<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  		<div class="modal-dialog modal-lg" role="document">
+    		<div class="modal-content">
+      			<div class="modal-header">
+        			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        			<h4 class="modal-title" id="myModalLabel">Staff</h4>
+      			</div>
+      			<div class="modal-body" ng-if="!saveeditwaitor">
+        			<form class="form-horizontal">
+  						<div class="form-group">
+    						<label class="col-sm-2 control-label" for="firstName">Name</label>
+    						<div class="col-sm-10">
+    							<input type="text" class="form-control" id="firstName" ng-model="editwaitor.name" placeholder="Name">
+    						</div>
+  						</div>
+  						<div class="form-group">
+    						<label class="col-sm-2 control-label" for="lastName">Surname</label>
+    						<div class="col-sm-10">
+    							<input type="text" class="form-control" id="lastName" ng-model="editwaitor.surname" placeholder="Surname">
+    						</div>
+  						</div>
+  						<div class="form-group">
+    						<label class="col-sm-2 control-label" for="id_number">ID</label>
+    						<div class="col-sm-10">
+    							<input type="text" class="form-control" id="id_number" ng-model="editwaitor.id_number" placeholder="ID Number">
+    						</div>
+  						</div>
+  						<div class="form-group">
+    						<label class="col-sm-2 control-label" for="email">Email</label>
+    						<div class="col-sm-10">
+    							<input type="email" class="form-control" id="email" ng-model="editwaitor.email" placeholder="Email">
+    						</div>
+  						</div>
+  						<div class="form-group">
+    						<label class="col-sm-2 control-label" for="telephone">Telephone</label>
+    						<div class="col-sm-10">
+    							<input type="text" class="form-control" id="telephone" ng-model="editwaitor.telephone" placeholder="Telephone">
+    						</div>
+  						</div>
+  						
+					</form>
+      			</div>
+      			<div class="modal-body text-center" ng-if="saveeditwaitor">
+      				<h3>Please wait..</h3>
+      			</div>
+      			<div class="modal-footer">
+        			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        			<button type="button" class="btn btn-primary" ng-click="SaveEditWaitor()">Save</button>
+      			</div>
+    		</div>
+  		</div>
+	</div>
+	
+	<!-- MENUS -->
+	<div class="col-md-10" ng-show="view == '3'" ng-cloak>
+		Menu
+	</div>
+	
+	<!-- TABLES -->
+	
+	<div class="col-md-10" ng-show="view == '4'" ng-cloak>
+		<div class="row">
+			<div class="col-md-10">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<div class="panel-title pull-left">
+     						Layout
+     					</div>
+    					<div class="panel-title pull-right">
+    						<div class="btn-group" role="group" aria-label="...">
+						  		<button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-th-list" ng-click="areaview = '0'"></span></button>
+						  		<button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-th" ng-click="areaview = '1'"></span></button>
+							</div>
+    					</div>
+    					<div class="clearfix"></div>
+					</div>
+		  			<div class="panel-body">
+		  				<div class="row">
+		 					<div class="col-md-12" ng-class="{ 'text-center': !floorplan.length}">
+		 						<div class="panel panel-primary" ng-repeat="f in floorplan" >
+									<div class="panel-heading">
+										<div class="panel-title pull-left">
+	         								{{ f.name }} {{ f.id }}
+	         								<span ng-if="!f.name">Area {{ $index + 1 }}</span>
+	         							</div>
+	        							<div class="panel-title pull-right">
+	        								<a ng-click="ShowAreaModal(f)"><span class="glyphicon glyphicon-cog"></span></a>
+	        							</div>
+	        							<div class="clearfix"></div>
+        							</div>
+		  							<div class="panel-body">
+		  								<table ng-if="areaview == '0'" class="table table-bordered table-striped">
+		  									<thead>
+		  										<tr>
+		  											<th>Table</th>
+		  											<th>Code</th>
+		  											<th>Code</th>
+		  										</tr>
+		  									</thead>
+		  									<tbody>
+		  										<tr ng-repeat="t in f.restaurantbranchareatable">
+		  											<td>
+		  												<span ng-if="t.display_name">
+		  													{{ t.display_name }}
+		  												</span>
+		  												<span ng-if="!t.display_name">Table {{ t.id }}<br/></span>
+		  											</td>
+		  											<td>
+		  												<small>{{ t.hashed }}</small>
+		  											</td>
+		  											<td class="col-md-1">
+		  												<button class="btn btn-block btn-xs btn-default" ng-click="ShowTableModal(t)">edit</button>
+		  											</td>
+		  										</tr>
+		  									</tbody>
+		  								</table>
+		  								<div ng-repeat="t in f.restaurantbranchareatable" class="col-md-4" ng-if="areaview == '1'">
+		  									<div class="floortable" ng-click="ShowTableModal(t)">{{ restaurant.id }}-{{ branches[0].id }}-{{ t.id }}</div>
+		  								</div>
+		  							</div>
+		  							<div class="panel-footer text-left">
+		  								
+	         								
+	         							<div class="panel-title pull-left">
+	         								<button class="btn btn-warning btn-xs" ng-click="AddTableToArea(f.id)">Add Table</button>
+	         							</div>
+	        							<div class="panel-title pull-right">
+	        							</div>
+	        							<div class="clearfix"></div>
+		  								
+		  							</div>
+		  						</div>
+							</div>
+		 				</div>
+		  			</div>
+		  			<div class="panel-footer text-right">
+		  				<button class="btn btn-default btn-lg" ng-click="AddAreaToFloorplan()">Add Area</button>
+		  			</div>
+				</div>
+			</div>
+			
+			<div class="col-md-2">
+				<div class="panel panel-primary" draggable="true">
+				<div class="panel-heading">Tools</div>
+		  			<div class="panel-body">
+		  			</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	
+	<!-- Modal -->
+	<div class="modal fade bs-example-modal-lg" id="tableModal" tabindex="-1" role="dialog" aria-labelledby="tableModal">
+  		<div class="modal-dialog modal-lg" role="document">
+    		<div class="modal-content">
+      			<div class="modal-header">
+        			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        			<h4 class="modal-title" id="myModalLabel">Edit Table {{ selectedtable.id }}</h4>
+      			</div>
+      			<div class="modal-body">
+      				<div class="row">
+      					<div class="col-md-8">
+      						<form class="form-horizontal">
+      							<div class="form-group">
+		    						<label class="col-sm-2 control-label" for="firstName">Name</label>
+		    						<div class="col-sm-10">
+		    							<input type="text" class="form-control" id="firstName" ng-model="selectedtable.display_name" placeholder="Name">
+		    						</div>
+		  						</div>
+		  						<div class="form-group">
+		  							<label class="col-sm-2 control-label" for="firstName"></label>
+		    						<div class="col-sm-10">
+		    							
+		    							
+		    						</div>
+		  						</div>
+      						</form>
+      						<br/>
+      						
+      					</div>
+      					<div class="col-md-4 text-center">
+      						<qrcode version="6" error-correction-level="M" size="{{s}}" ng-init="s=250" data="{{selectedtable.hashed}}" download></qrcode><br/>
+      						<small>{{ selectedtable.hashed }}</small>
+      					</div>
+      				</div>
+      				
+      				
+      			</div>
+      			<div class="modal-footer">
+      				<button class="btn btn-danger" data-dismiss="modal" ng-click="DeleteTable()">Delete Table</button>
+        			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        			<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="SaveTableEdit()">Save</button>
+      			</div>
+    		</div>
+  		</div>
+	</div>
+	
+	<div class="modal fade bs-example-modal-lg" id="areaModal" tabindex="-1" role="dialog" aria-labelledby="areaModal">
+  		<div class="modal-dialog modal-lg" role="document">
+    		<div class="modal-content">
+      			<div class="modal-header">
+        			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        			<h4 class="modal-title" id="myModalLabel">Edit Area {{ selectedarea.id }}</h4>
+      			</div>
+      			<div class="modal-body">
+      				<div class="row">
+      					<div class="col-md-8">
+      						<form class="form-horizontal">
+      							<div class="form-group">
+		    						<label class="col-sm-2 control-label" for="firstName">Name</label>
+		    						<div class="col-sm-10">
+		    							<input type="text" class="form-control" id="firstName" ng-model="selectedarea.name" placeholder="Name">
+		    						</div>
+		  						</div>
+		  						<div class="form-group">
+		  							<label class="col-sm-2 control-label" for="firstName"></label>
+		    						<div class="col-sm-10">
+		    							
+		    							
+		    						</div>
+		  						</div>
+      						</form>
+      						<br/>
+      						
+      					</div>
+      					<div class="col-md-4 text-center">
+      					</div>
+      				</div>
+      				
+      				
+      			</div>
+      			<div class="modal-footer">
+      				<button class="btn btn-danger" data-dismiss="modal" ng-click="DeleteArea()">Delete Area</button>
+        			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        			<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="SaveAreaEdit()">Save</button>
+      			</div>
+    		</div>
+  		</div>
+	</div>
+	
+ </div>
