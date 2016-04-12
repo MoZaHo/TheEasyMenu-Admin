@@ -28,8 +28,8 @@
   			</div>
 		</div>
 	</div>
-	
-	
+
+
 	<div class="col-md-10" ng-show="view == '0'" ng-cloak>
 		<div class="row">
 			<div class="col-md-4">
@@ -50,7 +50,7 @@
 		 					<div class="col-md-12 text-center text-warning"><h2>{{ restaurant.users }}</h2></div>
 		 				</div>
 		  			</div>
-				</div> 				
+				</div>
 		 	</div>
 		 	<div class="col-md-4">
 		  		<div class="panel panel-default">
@@ -60,7 +60,7 @@
 		 					<div class="col-md-12 text-center text-success"><h2>R TODO</h2></div>
 		 				</div>
 		  			</div>
-				</div> 				
+				</div>
 		 	</div>
 			<div class="col-md-12">
 		  		<div class="panel panel-default">
@@ -74,7 +74,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="col-md-10" ng-show="view == '1'" ng-cloak>
 		<div class="row">
 			<div class="col-md-12">
@@ -95,7 +95,7 @@
                         		</div>
 							</div>
 						</div>
-						
+
 						<div class="row form-group">
 							<div class="col-md-4">Location</div>
 							<div class="col-md-4">
@@ -105,7 +105,7 @@
 								<input class="form-control" value="" placeholder="Long" ng-model="branches[0].locationy">
 							</div>
 						</div>
-						
+
 						<div class="row form-group">
 							<div class="col-md-4">Menus</div>
 							<div class="col-md-8">
@@ -128,7 +128,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- LINK STAFF TO BRANCH -->
 	<div class="col-md-10" ng-show="view == '2'" ng-cloak>
 		<div class="row">
@@ -140,7 +140,7 @@
   							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					
+
 					<div class="panel-body">
 						<div class="row form-group">
 							<div class="col-md-12">
@@ -159,9 +159,9 @@
 										<tr ng-repeat="s in staff">
 											<td>{{ s.name }} {{ s.surname }}</td><td>{{ s.id_number }}</td><td>{{ s.email }}</td><td>{{ s.telephone }}</td><td></td><td><button class="btn btn-xs btn-default" ng-click="SetEditStaff(s)">View</button></td>
 										</tr>
-									</tbody>																	
+									</tbody>
 								</table>
-																
+
 							</div>
 						</div>
 					</div>
@@ -174,7 +174,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- Modal -->
 	<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   		<div class="modal-dialog modal-lg" role="document">
@@ -215,7 +215,7 @@
     							<input type="text" class="form-control" id="telephone" ng-model="editwaitor.telephone" placeholder="Telephone">
     						</div>
   						</div>
-  						
+
 					</form>
       			</div>
       			<div class="modal-body text-center" ng-if="saveeditwaitor">
@@ -228,14 +228,14 @@
     		</div>
   		</div>
 	</div>
-	
+
 	<!-- MENUS -->
 	<div class="col-md-10" ng-show="view == '3'" ng-cloak>
 		Menu
 	</div>
-	
+
 	<!-- TABLES -->
-	
+
 	<div class="col-md-10" ng-show="view == '4'" ng-cloak>
 		<div class="row">
 			<div class="col-md-10">
@@ -297,15 +297,15 @@
 		  								</div>
 		  							</div>
 		  							<div class="panel-footer text-left">
-		  								
-	         								
+
+
 	         							<div class="panel-title pull-left">
 	         								<button class="btn btn-warning btn-xs" ng-click="AddTableToArea(f.id)">Add Table</button>
 	         							</div>
 	        							<div class="panel-title pull-right">
 	        							</div>
 	        							<div class="clearfix"></div>
-		  								
+
 		  							</div>
 		  						</div>
 							</div>
@@ -316,7 +316,7 @@
 		  			</div>
 				</div>
 			</div>
-			
+
 			<div class="col-md-2">
 				<div class="panel panel-primary" draggable="true">
 				<div class="panel-heading">Tools</div>
@@ -324,10 +324,10 @@
 		  			</div>
 				</div>
 			</div>
-			
+
 		</div>
 	</div>
-	
+
 	<!-- Modal -->
 	<div class="modal fade bs-example-modal-lg" id="tableModal" tabindex="-1" role="dialog" aria-labelledby="tableModal">
   		<div class="modal-dialog modal-lg" role="document">
@@ -349,21 +349,21 @@
 		  						<div class="form-group">
 		  							<label class="col-sm-2 control-label" for="firstName"></label>
 		    						<div class="col-sm-10">
-		    							
-		    							
+
+
 		    						</div>
 		  						</div>
       						</form>
       						<br/>
-      						
+
       					</div>
       					<div class="col-md-4 text-center">
       						<qrcode version="6" error-correction-level="M" size="{{s}}" ng-init="s=250" data="{{selectedtable.hashed}}" download></qrcode><br/>
       						<small>{{ selectedtable.hashed }}</small>
       					</div>
       				</div>
-      				
-      				
+
+
       			</div>
       			<div class="modal-footer">
       				<button class="btn btn-danger" data-dismiss="modal" ng-click="DeleteTable()">Delete Table</button>
@@ -373,7 +373,7 @@
     		</div>
   		</div>
 	</div>
-	
+
 	<div class="modal fade bs-example-modal-lg" id="areaModal" tabindex="-1" role="dialog" aria-labelledby="areaModal">
   		<div class="modal-dialog modal-lg" role="document">
     		<div class="modal-content">
@@ -394,19 +394,19 @@
 		  						<div class="form-group">
 		  							<label class="col-sm-2 control-label" for="firstName"></label>
 		    						<div class="col-sm-10">
-		    							
-		    							
+
+
 		    						</div>
 		  						</div>
       						</form>
       						<br/>
-      						
+
       					</div>
       					<div class="col-md-4 text-center">
       					</div>
       				</div>
-      				
-      				
+
+
       			</div>
       			<div class="modal-footer">
       				<button class="btn btn-danger" data-dismiss="modal" ng-click="DeleteArea()">Delete Area</button>
@@ -416,5 +416,5 @@
     		</div>
   		</div>
 	</div>
-	
+
  </div>
