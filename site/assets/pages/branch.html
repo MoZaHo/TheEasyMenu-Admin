@@ -27,6 +27,17 @@
  				</div>
   			</div>
 		</div>
+		
+		<div class="panel panel-primary" ng-if="view == '3'">
+			<div class="panel-heading">Extra Menu Shit</div>
+  			<div class="panel-body">
+  				<div class="row">
+  					<div class="col-md-12">
+  						
+ 					</div>
+ 				</div>
+  			</div>
+		</div>
 	</div>
 
 
@@ -231,7 +242,33 @@
 
 	<!-- MENUS -->
 	<div class="col-md-10" ng-show="view == '3'" ng-cloak>
-		Menu
+		<div class="row">
+			<div class="col-md-12">
+				
+			</div>
+		</div>
+		<div class="row">
+			
+     		<div class="col-md-10">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Menu
+     				</div>
+     				<div class="panel-body">
+     					Layout
+     				</div>
+     			</div>
+     		</div>
+     		<div class="col-md-2">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Tags
+     				</div>
+     				<div class="panel-body">
+     				</div>
+     			</div>
+     		</div>
+     	</div>
 	</div>
 
 	<!-- TABLES -->
@@ -258,7 +295,7 @@
 		 						<div class="panel panel-primary" ng-repeat="f in floorplan" >
 									<div class="panel-heading">
 										<div class="panel-title pull-left">
-	         								{{ f.name }} {{ f.id }}
+	         								{{ f.name }}
 	         								<span ng-if="!f.name">Area {{ $index + 1 }}</span>
 	         							</div>
 	        							<div class="panel-title pull-right">
@@ -272,18 +309,18 @@
 		  										<tr>
 		  											<th>Table</th>
 		  											<th>Code</th>
-		  											<th>Code</th>
+		  											<th></th>
 		  										</tr>
 		  									</thead>
 		  									<tbody>
 		  										<tr ng-repeat="t in f.restaurantbranchareatable">
-		  											<td>
+		  											<td class="col-md-8">
 		  												<span ng-if="t.display_name">
 		  													{{ t.display_name }}
 		  												</span>
 		  												<span ng-if="!t.display_name">Table {{ t.id }}<br/></span>
 		  											</td>
-		  											<td>
+		  											<td class="col-md-3">
 		  												<small>{{ t.hashed }}</small>
 		  											</td>
 		  											<td class="col-md-1">
