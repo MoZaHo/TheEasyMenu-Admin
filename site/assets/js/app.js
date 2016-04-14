@@ -1,4 +1,4 @@
-endpoint = "http://localhost/CoderSet/TheEasyMenu-Backend/";
+endpoint = "http://localhost/TheEasyMenu-Backend/";
 
 var theeasymenu = angular.module('theeasymenu', ['ngRoute','monospaced.qrcode','ngMd5']);
 
@@ -149,7 +149,6 @@ theeasymenu.controller('branch', function($scope , DataService , $routeParams , 
 
 	/** AREAS **/
 	$scope.$on('GetAreaSucess',function(event,data) {
-		console.log('event',data.data.data[0].restaurantbranchareatable);
 		$scope.floorplan = data.data.data;
 	});
 
