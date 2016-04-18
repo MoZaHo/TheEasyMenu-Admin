@@ -1,4 +1,5 @@
-endpoint = "http://localhost/TheEasyMenu-Backend/";
+//endpoint = "http://localhost/TheEasyMenu-Backend/";
+endpoint = "http://localhost/CoderSet/TheEasyMenu-Backend/";
 
 var theeasymenu = angular.module('theeasymenu', ['ngRoute','monospaced.qrcode','ngMd5']);
 
@@ -116,7 +117,7 @@ theeasymenu.controller('restaurant', function($scope , DataService , $routeParam
 
 	  $scope.GetBranches();
 	  $scope.GetRestaurant();
-	  $scope.GetMenus();
+	  //$scope.GetMenus();
 
 
 });
@@ -130,6 +131,110 @@ theeasymenu.controller('branch', function($scope , DataService , $routeParams , 
 
 	$scope.floorplanid = 1;
 	$scope.tableid = 1;
+	
+	
+	
+	/************************************************************************************************************************/
+	/** Sections and menu items **/
+	/************************************************************************************************************************/
+	$scope.menus = {};
+	$scope.newmenu = {};
+	$scope.selectedmenu = {};
+	$scope.selectedmenuaction = "Add";
+	$scope.selectedmenusection = {};
+	$scope.selectedmenusectionaction = "Add";
+	
+	//Get Menus
+	$scope.$on('GetMenuSuccess',function(event,data) {
+		$scope.menus = data.data.data;
+	});
+	
+	$scope.GetMenus = function() {
+		DataService.get(
+			'',
+			endpoint + 'menu/get',
+			{'restaurant_id' : $routeParams.restaurantid, 'menu_id' : 0 , 'include_menuitems' : true , 'include_picture' : false},
+			'GetMenuSuccess',
+			'GetMenuSuccess',
+			true,
+			0
+		);
+	}
+	
+	$scope.GetMenus();
+	
+	//Add new menu
+	$scope.SaveMainMenu = function() {
+		DataService.get(
+			'',
+			endpoint + 'menu/add',
+			{'restaurant_id' : $routeParams.restaurantid, 'menu' : $scope.newmenu},
+			'GetMenusAction',
+			'GetMenusAction',
+			true,
+			0
+		);
+	}
+	
+	$scope.$on('GetMenusAction',function(event,data) {
+		$scope.GetMenus();
+	});
+	
+	//Add new menu modal
+	$scope.ShowMainMenuModal = function() {
+		$scope.newmenu = {};
+		$scope.newmenu.restaurant_id = $routeParams.restaurantid;
+		$scope.newmenu.name = '';
+		
+		$('#MainMenuModal').modal({
+			  keyboard: true
+		});
+	}
+	
+	//Get Section and Menu Items by Menu ID
+	$scope.$on('GetSectionsSuccess',function(event,data) {
+		
+	});
+	
+	$scope.GetSections = function() {
+		DataService.get(
+			'',
+			endpoint + 'table/add',
+			{'menu' : $routeParams.restaurantid , 'restaurant_branch_id' : $routeParams.branchid , 'restaurant_branch_area_id' : areaid},
+			'GetSectionsSuccess',
+			'GetSectionsSuccess',
+			true,
+			0
+		);
+	}
+	
+	$scope.ShowSectionModal = function(selectedSection,action) {
+		$scope.selectedsection = selectedSection;
+		
+		$('#sectionModal').modal({
+			  keyboard: true
+		});
+	}
+	
+	$scope.$on('SaveSectionSuccess',function(event,data) {
+		
+	});
+	
+	$scope.SaveSection = function() {
+		DataService.get(
+			'',
+			endpoint + 'menusection/add',
+			{'selectedmenu' : this.selectedmenu , 'menu_section' : $scope.selectedmenusection },
+			'SaveSectionSuccess',
+			'SaveSectionSuccess',
+			true,
+			0
+		);
+	}
+	
+	/************************************************************************************************************************/
+	/** END OF MENUS **/
+	/************************************************************************************************************************/
 
 	$scope.$on('SetTableSucess',function(event,data) {
 		$scope.GetAreasByBranch();
@@ -284,8 +389,6 @@ theeasymenu.controller('branch', function($scope , DataService , $routeParams , 
 	  $scope.$on('GetBranchesSucess',function(event , data) {
 		  $scope.branches = data.data.data;
 		  $scope.branchesbkp = data.data.data;
-		  $scope.GetMenus();
-
 	  });
 
 	  $scope.GetBranches = function() {
@@ -323,24 +426,9 @@ theeasymenu.controller('branch', function($scope , DataService , $routeParams , 
 	  };
 
 	  $scope.$on('GetMenusSuccess',function(event , data) {
-		  $scope.menus = data.data.data;
+		  //$scope.menus = data.data.data;
 		  $scope.GetStaff();
 	  });
-
-	  $scope.GetMenus = function() {
-
-		  DataService.get(
-				  'restaurant_menus',
-				  endpoint + 'menu/list',
-				  {'restaurant_id' : $routeParams.restaurantid},
-				  'GetMenusSuccess',
-				  'GetMenusSuccess',
-				  true,
-				  0
-		  );
-
-	  };
-
 
 	  $scope.GetRestaurant();
 
