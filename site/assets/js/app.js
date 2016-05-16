@@ -51,6 +51,32 @@ theeasymenu.controller('dashboard', function($scope , DataService) {
 	  };
 
 	  $scope.DashboardGetRestaurants();
+	  
+	  $scope.newrestaurant = {
+			  "name" : ""
+	  }
+	  
+	  $scope.AddRestaurantModal = function() {
+		  $('#newRestaurantModal').modal({
+			  keyboard: true
+		});
+	  }
+	  
+	  $scope.$on('AddRestaurantSuccess',function(event,data) {
+		  $scope.DashboardGetRestaurants();
+	  });
+	  
+	  $scope.SaveNewRestaurant = function() {
+		  DataService.get(
+				  '',
+				  endpoint + 'restaurant/add',
+				  {'restaurant' : $scope.newrestaurant},
+				  'AddRestaurantSuccess',
+				  'AddRestaurantSuccess',
+				  true,
+				  0
+		  );
+	  }
 
 });
 
@@ -64,6 +90,12 @@ theeasymenu.controller('restaurant', function($scope , DataService , $routeParam
 	  $scope.$on('GetBranchesSucess',function(event , data) {
 		  $scope.branches = data.data.data;
 	  });
+	  
+	  $scope.view = 0;
+	  
+	  $scope.newbranch = {
+			  "name" : ""
+	  };
 
 	  $scope.GetBranches = function() {
 
@@ -118,31 +150,47 @@ theeasymenu.controller('restaurant', function($scope , DataService , $routeParam
 	  $scope.GetBranches();
 	  $scope.GetRestaurant();
 	  //$scope.GetMenus();
-
-
-});
-
-theeasymenu.controller('branch', function($scope , DataService , $routeParams , $timeout , md5) {
-
-	$scope.view = '3';
-	$scope.areaview = '0';
-
-	$scope.floorplan = [];
-
-	$scope.floorplanid = 1;
-	$scope.tableid = 1;
-	
-	
-	
-	/************************************************************************************************************************/
-	/** Sections and menu items **/
-	/************************************************************************************************************************/
-	$scope.menus = {};
+	  
+	  $scope.AddBranchModal = function() {
+		  $('#newBranchModal').modal({
+			  keyboard: true
+		  });
+	  }
+	  
+	  $scope.$on('AddBranchSuccess',function(event,data) {
+		  $scope.GetBranches();
+		  $scope.GetRestaurant();
+	  });
+	  
+	  $scope.SaveNewBranch = function() {
+		  DataService.get(
+				  '',
+				  endpoint + 'branch/add',
+				  {'restaurant_id' : $routeParams.restaurantid , 'branch' : $scope.newbranch},
+				  'AddBranchSuccess',
+				  'AddBranchSuccess',
+				  true,
+				  0
+		  );
+	  }
+	  
+  	$scope.menus = {};
 	$scope.newmenu = {};
 	$scope.selectedmenu = {};
 	$scope.selectedmenuaction = "Add";
 	$scope.selectedmenusection = {};
 	$scope.selectedmenusectionaction = "Add";
+	  
+	//Add new menu modal
+	$scope.ShowMainMenuModal = function() {
+		$scope.newmenu = {};
+		$scope.newmenu.restaurant_id = $routeParams.restaurantid;
+		$scope.newmenu.name = '';
+		
+		$('#MainMenuModal').modal({
+			  keyboard: true
+		});
+	}
 	
 	//Get Menus
 	$scope.$on('GetMenuSuccess',function(event,data) {
@@ -180,16 +228,22 @@ theeasymenu.controller('branch', function($scope , DataService , $routeParams , 
 		$scope.GetMenus();
 	});
 	
-	//Add new menu modal
-	$scope.ShowMainMenuModal = function() {
-		$scope.newmenu = {};
-		$scope.newmenu.restaurant_id = $routeParams.restaurantid;
-		$scope.newmenu.name = '';
-		
-		$('#MainMenuModal').modal({
-			  keyboard: true
-		});
+	$scope.ShowMenuSections = function(menu) {
+		$scope.view = 1;
+		$scope.selectedmenu = menu;
 	}
+	
+	$scope.$on('GetMenuByIdSuccess',function(event,data) {
+		$scope.selectedmenu.sections = data.data.data[0].sections;
+		
+		//Now also update the original object
+		angular.forEach($scope.menus , function(v,k) {
+			if (v.id == $scope.selectedmenu.id) {
+				$scope.menus[k] = $scope.selectedmenu;
+			}
+		});
+		
+	});
 	
 	//Get Section and Menu Items by Menu ID
 	$scope.$on('GetSectionsSuccess',function(event,data) {
@@ -216,7 +270,18 @@ theeasymenu.controller('branch', function($scope , DataService , $routeParams , 
 		});
 	}
 	
+	
+	
 	$scope.$on('SaveSectionSuccess',function(event,data) {
+		DataService.get(
+				'',
+				endpoint + 'menu/get',
+				{'restaurant_id' : $routeParams.restaurantid, 'menu_id' : $scope.selectedmenu.id , 'include_menuitems' : true , 'include_picture' : false},
+				'GetMenuByIdSuccess',
+				'GetMenuByIdSuccess',
+				true,
+				0
+			);
 		
 	});
 	
@@ -224,13 +289,50 @@ theeasymenu.controller('branch', function($scope , DataService , $routeParams , 
 		DataService.get(
 			'',
 			endpoint + 'menusection/add',
-			{'selectedmenu' : this.selectedmenu , 'menu_section' : $scope.selectedmenusection },
+			{'selectedmenu' : $scope.selectedmenu , 'menu_section' : $scope.selectedmenusection },
 			'SaveSectionSuccess',
 			'SaveSectionSuccess',
 			true,
 			0
 		);
 	}
+	
+	$scope.ShowAddItemModal = function() {
+		$('#itemModal').modal({keyboard:true});
+	}
+	
+	$scope.AddItemToMenuSection = function() {
+		
+	}
+
+
+});
+
+theeasymenu.controller('branch', function($scope , DataService , $routeParams , $timeout , md5) {
+
+	$scope.view = '0';
+	$scope.areaview = '0';
+
+	$scope.floorplan = [];
+
+	$scope.floorplanid = 1;
+	$scope.tableid = 1;
+	
+	$scope.saleunits = [{"id":"1","name":"glass"},{"id":"2","name":"bottle"}];
+	
+	$scope.selecteditem = {};
+	
+	
+	/************************************************************************************************************************/
+	/** Sections and menu items **/
+	/************************************************************************************************************************/
+	
+	
+	
+	
+	
+	
+	
 	
 	/************************************************************************************************************************/
 	/** END OF MENUS **/
